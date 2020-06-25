@@ -19,6 +19,8 @@
     "prettier"
   ],
   "rules": {
+    "class-methods-use-this": "off",
+    "prettier/prettier": "error",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -28,7 +30,6 @@
     ]
   },
   "settings": {
-    "prettier/prettier": "error",
     "import/resolver": {
       "typescript": {}
     }

@@ -15,7 +15,7 @@ export const Container = styled.div`
     visibility: hidden;
 
     position: absolute;
-    bottom: calc(100%+ 12px);
+    bottom: calc(100% + 12px);
     left: 50%;
     transform: translateX(-50%);
     color: #312e38;

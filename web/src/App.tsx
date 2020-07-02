@@ -1,14 +1,13 @@
-import React from 'react';
-// import SignIn from './pages/SignIn';
-import SingUp from './pages/SignUp';
-import GlobalStyle from './styles/global';
+import React from "react";
+import SignIn from "./pages/SignIn";
+// import SingUp from "./pages/SignUp";
+import GlobalStyle from "./styles/global";
 
 const App = () => (
   <>
     <GlobalStyle />
-    <SingUp />
+    <SignIn />
   </>
-
 );
 
 export default App;

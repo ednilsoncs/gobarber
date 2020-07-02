@@ -1,10 +1,10 @@
-import React, { ButtonHTMLAttributes } from 'react';
-import { Container } from './styles';
+import React, { ButtonHTMLAttributes } from "react";
+import { Container } from "./styles";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: React.FC<ButtonProps> = ({ children, ...rest }: ButtonProps) => (
-  <Container {...rest} type="button">
+  <Container type="button" {...rest}>
     {children}
   </Container>
 );

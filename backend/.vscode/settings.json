@@ -3,6 +3,7 @@
     "dtos",
     "gobarber",
     "gostack",
+    "tsyringe",
     "typeorm"
   ]
 }

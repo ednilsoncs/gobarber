@@ -4,6 +4,7 @@
     "gobarber",
     "gostack",
     "tsyringe",
-    "typeorm"
+    "typeorm",
+    "uuidv"
   ]
 }

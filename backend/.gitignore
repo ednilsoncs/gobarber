@@ -3,3 +3,4 @@ build/
 temp/
 tmp/*
 !tmp/.gitkeep
+/coverage

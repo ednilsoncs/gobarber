@@ -1,4 +1,4 @@
-import IFindAllProvidersDTO from '@modules/appointments/dtos/IFindAllProvidersDTO';
+import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO';
 import User from '../infra/typeorm/entities/User';
 import ICreateUserDto from '../dtos/ICreateUserDTO';
 

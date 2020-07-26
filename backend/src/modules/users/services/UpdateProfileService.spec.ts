@@ -62,6 +62,23 @@ describe('UpdateProfile', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+  it('should be able to update the password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'jho doe',
+      email: 'joe@gmail.com',
+      password: '123456',
+    });
+
+    const updatedUser = await updateProfileService.execute({
+      user_id: user.id,
+      name: 'Jho doe',
+      email: 'joe@gmail.com',
+      old_password: '123456',
+      password: '123123',
+    });
+
+    expect(updatedUser.password).toBe('123123');
+  });
   it('should not be able to update the password without old password', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
@@ -93,6 +110,17 @@ describe('UpdateProfile', () => {
         email: 'john@example.com',
         old_password: 'wrong-old-password',
         password: '1234123',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to update profile from non-existing user', async () => {
+    await expect(
+      updateProfileService.execute({
+        user_id: 'non_existing_user_id_',
+        name: 'John Doe',
+        email: 'john@example.com',
+        old_password: 'xx-wrong-password-xx',
+        password: '123123',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

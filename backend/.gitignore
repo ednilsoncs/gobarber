@@ -4,3 +4,4 @@ temp/
 tmp/*
 !tmp/.gitkeep
 /coverage
+/.env

@@ -2,28 +2,22 @@ import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import AuthenticateUserService from './AuthenticateUserService';
-import CreateUsersService from './CreateUserService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
-let createUsersService: CreateUsersService;
 let authenticateUserService: AuthenticateUserService;
 let user;
 describe('CreateUser', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
-    createUsersService = new CreateUsersService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
     authenticateUserService = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
   });
   it('should be able to authenticate', async () => {
-    user = await createUsersService.execute({
+    user = await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'john@example.com',
       password: '123456',
@@ -46,7 +40,7 @@ describe('CreateUser', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
   it('should be able to authenticate with wrong password', async () => {
-    await createUsersService.execute({
+    await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'john@example.com',
       password: '123456',

@@ -9,6 +9,7 @@ let fakeCacheProvider: FakeCacheProvider;
 describe('ListProvidersService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
+    fakeCacheProvider = new FakeCacheProvider();
     listProvidersService = new ListProvidersService(
       fakeUsersRepository,
       fakeCacheProvider,

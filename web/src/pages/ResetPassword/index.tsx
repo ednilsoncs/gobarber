@@ -3,7 +3,7 @@ import React, { useRef, useCallback } from 'react';
 import { FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useToast } from '../../hooks/toast';
 import logoImg from '../../assets/logo.svg';
@@ -11,6 +11,7 @@ import { Container, Background, Content, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
@@ -19,6 +20,7 @@ interface ResetPasswordFormData {
 
 const ResetPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const location = useLocation();
   const history = useHistory();
   const { addToast } = useToast();
   const handleSubmit = useCallback(
@@ -36,6 +38,21 @@ const ResetPassword: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
+        const { password, password_confirm } = data;
+        const token = location.search.replace('?token=', '');
+        if (!token) {
+          addToast({
+            type: 'error',
+            title: 'Erro ao resetar a senha',
+            description:
+              'Ocorreu um erro ao resetar sua senha, tente novamente',
+          });
+        }
+        await api.post('/password/reset', {
+          password,
+          password_confirm,
+          token,
+        });
 
         history.push('/');
       } catch (err) {
@@ -52,7 +69,7 @@ const ResetPassword: React.FC = () => {
         });
       }
     },
-    [addToast, history],
+    [addToast, history, location.search],
   );
   return (
     <Container>
@@ -71,7 +88,7 @@ const ResetPassword: React.FC = () => {
 
             <Input
               icon={FiLock}
-              name="password_confirmation"
+              name="password_confirm"
               type="password"
               placeholder="Confirmação da senha"
             />

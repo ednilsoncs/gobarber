@@ -35,6 +35,8 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.0.0",
+    "@testing-library/jest-native": "^3.3.0",
+    "@testing-library/react-native": "^7.0.1",
     "@types/jest": "^24.0.24",
     "@types/react-native": "^0.62.0",
     "@types/react-native-vector-icons": "^6.4.5",
@@ -60,7 +62,17 @@
     "typescript": "^3.8.3"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "src/pages/**/*.tsx",
+      "src/components/**/*.tsx",
+      "src/hooks/*.tsx",
+      "!src/hooks/index.tsx"
+    ],
     "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "setupFiles": ["./src/setupTests.ts","./node_modules/react-native-gesture-handler/jestSetup.js"],
     "moduleFileExtensions": [
       "ts",
       "tsx",

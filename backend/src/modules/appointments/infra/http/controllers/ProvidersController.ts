@@ -7,10 +7,10 @@ export default class ProvidersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
 
-    const createAppointment = container.resolve(ListProvidersService);
-    const appointment = await createAppointment.execute({
+    const listProvidersService = container.resolve(ListProvidersService);
+    const listProviders = await listProvidersService.execute({
       user_id,
     });
-    return response.json(classToClass(appointment));
+    return response.json(classToClass(listProviders));
   }
 }
